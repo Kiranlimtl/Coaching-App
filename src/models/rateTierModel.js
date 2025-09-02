@@ -13,8 +13,8 @@ export const RateTierModel = {
         return rows[0] ? rows[0].id : null;
     },
 
-    async getRateTierById(rateTierId) {
-        const result = await db.query(`SELECT * FROM rate_tier WHERE id = $1`, [rateTierId]);
-        return result.rows[0];
+    async getRatePerHourById(rateTierId) {
+        const result = await db.query(`SELECT rate_per_hour FROM rate_tier WHERE id = $1`, [rateTierId]);
+        return result.rows[0] ? result.rows[0].rate_per_hour : null;
     }
 }
