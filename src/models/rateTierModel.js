@@ -1,18 +1,6 @@
 import db from '../config/db.js';
 
 export const RateTierModel = {
-    async getRateTierByNumStudents(numStudents) {
-        const query = `
-            SELECT * 
-            FROM rate_tier
-            WHERE ($1 BETWEEN min_students AND max_students)
-                OR (max_students IS NULL AND $1 >= min_students)
-            LIMIT 1
-        `;
-        const { rows } = await db.query(query, [numStudents]);
-        return rows[0];
-    },
-
     async getRateTierIdByNumStudents(numStudents) {
         const query = `
             SELECT id 
@@ -23,5 +11,10 @@ export const RateTierModel = {
         `;
         const { rows } = await db.query(query, [numStudents]);
         return rows[0] ? rows[0].id : null;
+    },
+
+    async getRateTierById(rateTierId) {
+        const result = await db.query(`SELECT * FROM rate_tier WHERE id = $1`, [rateTierId]);
+        return result.rows[0];
     }
 }
