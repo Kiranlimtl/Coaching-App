@@ -59,10 +59,10 @@ export const CoachPaymentModel = {
         return result.rows[0];
     },
 
-    async create({ coachId, rateTierId, levelId, classId, numStudents, classDuration, level, rateTier, finalRate, totalAmount, isPaid, paymentDate }) {
+    async create({ coachId, rateTierId, levelId, classId, numStudents, classDuration, finalRate, totalAmount, isPaid, paymentDate }) {
         const result = await db.query(
-            `INSERT INTO coach_payment (coach_id, rate_tier_id, level_id, class_id, num_students, class_duration, level, rate_tier, final_rate, total_amount, is_paid, payment_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
-            [coachId, rateTierId, levelId, classId, numStudents, classDuration, level, rateTier, finalRate, totalAmount, isPaid, paymentDate]
+            `INSERT INTO coach_payment (coach_id, rate_tier_id, level_id, class_id, num_students, class_duration, final_rate, total_amount, is_paid, payment_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
+            [coachId, rateTierId, levelId, classId, numStudents, classDuration, finalRate, totalAmount, isPaid, paymentDate]
         );
         return result.rows[0];
     },
