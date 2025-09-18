@@ -1,4 +1,5 @@
 import { CoachPaymentModel } from "../models/coachPaymentModel.js";
+import { intervalToHours } from "../utils/timeUtils.js";
 import { RateTierService } from "./rateTierService.js";
 import { LevelService } from "./levelService.js";
 import { CoachService } from "./coachService.js";
@@ -19,7 +20,7 @@ export const CoachPaymentService = {
                 throw new CustomError(ERROR_MESSAGES.CLASS_NOT_FOUND, 404);
             }
             const levelId = coach.level;
-            const levelRate = await LevelService.getLevelRateById(levelId);
+            const levelRate = Number(await LevelService.getLevelRateById(levelId));
 
             const students = await ClassStudentService.listClassStudent(classId);
             
@@ -27,9 +28,9 @@ export const CoachPaymentService = {
             if (numStudents === 0) {
                 throw new CustomError(ERROR_MESSAGES.NO_STUDENTS_IN_CLASS, 400);
             }
-            const duration = session.duration;
+            const duration = intervalToHours(session.duration);
             const rateTierId = await RateTierService.getRateTierIdByNumStudents(numStudents);
-            const ratePerHour = await RateTierService.getRatePerHour(rateTierId);
+            const ratePerHour = Number(await RateTierService.getRatePerHour(rateTierId));
             const finalRate = ratePerHour * levelRate;
             const totalAmount = finalRate * duration;
 
