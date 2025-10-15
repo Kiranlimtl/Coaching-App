@@ -55,6 +55,9 @@ export const CoachService = {
             id: coach.id,
             name: coach.name,
             email: coach.email,
+            level: coach.level,
+            phone: coach.phone,
+            isHeadCoach: coach.is_head_coach,
             createdAt: coach.created_at
         }
     },

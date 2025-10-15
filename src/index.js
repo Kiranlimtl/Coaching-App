@@ -4,6 +4,8 @@ import errorHandler from './middleware/errorHandlerMiddleware.js';
 import studentRoutes from './routes/studentRoutes.js';
 import classRoutes from './routes/classRoutes.js'
 import classStudentRoutes from './routes/classStudentRoutes.js';
+import coachPaymentRoutes from './routes/coachPaymentRoutes.js';
+
 
 
 const app = express();
@@ -27,6 +29,7 @@ app.use('/coaches', coachRoutes);
 app.use('/students', studentRoutes);
 app.use('/classes', classRoutes);
 app.use('/class-students', classStudentRoutes);
+app.use('/coach-payments', coachPaymentRoutes);
 
 app.use(errorHandler);
 

@@ -16,6 +16,20 @@ const ERROR_MESSAGES = {
     CLASS_NOT_FOUND: "Class not found",
     DELETE_CLASS_FAIL: "Failed to delete class",
     FETCH_CLASSES_FAIL: "Failed to fetch classes",
+    PAYMENT_NOT_FOUND: "Payment record not found",
+    NO_STUDENTS_IN_CLASS: "No students enrolled in the class",
+    CREATE_PAYMENT_FAIL: "Failed to create payment record",
+    FETCH_PAYMENTS_FAIL: "Failed to fetch payment records",
+    UPDATE_PAYMENT_FAIL: "Failed to update payment record",
+    PAYMENT_ALREADY_PAID: "Payment has already been marked as paid",
+    RATE_TIER_NOT_FOUND: "Rate tier not found",
+    LEVEL_NOT_FOUND: "Level not found",
+    NO_CHANGES_TO_APPLY: "No changes to apply after validation",
+    NO_CHANGES_DETECTED: "No changes detected",
+    COACH_CANNOT_MAKE_PAYMENT_THIS_CLASS: "Coach is not assigned to this class, you can only make payments for your own class",
+    PAYMENT_ALREADY_EXISTS_FOR_CLASS: "A payment record already exists for this class",
+
+
 }
 
 export default ERROR_MESSAGES;
