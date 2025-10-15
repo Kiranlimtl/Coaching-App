@@ -1,3 +1,4 @@
+import { fi } from 'zod/v4/locales';
 import db from '../config/db.js';
 
 export const CoachPaymentModel = {
@@ -59,9 +60,14 @@ export const CoachPaymentModel = {
         return result.rows[0];
     },
 
+    async findByClassId(classId) {
+        const result = await db.query(`SELECT * FROM coach_payment WHERE class_id = $1`, [classId]);
+        return result.rows[0];
+    },
+
     async create({ coachId, rateTierId, levelId, classId, numStudents, classDuration, finalRate, totalAmount, isPaid, paymentDate }) {
         const result = await db.query(
-            `INSERT INTO coach_payment (coach_id, rate_tier_id, level_id, class_id, num_students, class_duration, final_rate, total_amount, is_paid, payment_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
+            `INSERT INTO coach_payment (coach_id, rate_tier_id, level_id, class_id, num_students, class_duration, final_rate, total_amount, is_paid, payment_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
             [coachId, rateTierId, levelId, classId, numStudents, classDuration, finalRate, totalAmount, isPaid, paymentDate]
         );
         return result.rows[0];
