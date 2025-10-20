@@ -21,9 +21,11 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <Image 
         source ={require('../../../assets/coachflowlogov1.png')} 
-        style={{ width: 300, height: 300, marginBottom: 20 }} 
+        style={{ width: 300, height: 300, marginBottom: 10 }} 
         resizeMode="contain"
       />
+
+      <Text style={styles.title}>Welcome Back 🏀</Text>
 
       <TextInput
         placeholder="Email"
@@ -62,8 +64,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "600",
+    fontWeight: "800",
     marginBottom: 24,
+    color: "#053460",
+    paddingBottom: 20,
   },
   input: {
     width: "100%",
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
-    backgroundColor: "#F88158",
+    backgroundColor: "#ffa384ff",
     padding: 14,
     borderRadius: 8,
     alignItems: "center",
