@@ -2,20 +2,25 @@ import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
+import { login } from "@/services/authService";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = () => {
-    // Replace with your authentication logic
-    if (email === "demo@example.com" && password === "password") {
-      Alert.alert("Login successful!");
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      await login({ email, password });
       router.replace("/protected"); // redirect to protected area
-    } else {
-      Alert.alert("Invalid credentials");
+    } catch (err: any) {
+      console.error("Login error:", err);
+      Alert.alert("Login failed", err.message || "An error occurred during login");
+    } finally {
+      setLoading(false);
     }
   };
 
