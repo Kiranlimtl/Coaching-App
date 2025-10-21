@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function RegisterScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);  
     const router = useRouter();
 
     const handleRegister = () => {
@@ -26,7 +29,7 @@ export default function RegisterScreen() {
         <View style={styles.container}>
             <Image 
                 source ={require('../../../assets/coachflowlogov1.png')} 
-                style={{ width: 150, height: 150, marginBottom: 10 }} 
+                style={{ width: 200, height: 200, marginBottom: 10 }} 
                 resizeMode="contain"
             />
             
@@ -34,27 +37,48 @@ export default function RegisterScreen() {
 
             <TextInput
                 placeholder="Email"
-                style={styles.input}
+                style={styles.emailInput}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
             />
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Password"
+                    style={styles.passwwordInput}
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
+                <TouchableOpacity
+                    onPress={() => setShowPassword(!showPassword)}
+                    style={styles.iconButton}>
+                    <Ionicons
+                        name={showPassword ? 'eye-off' : 'eye'}
+                        size={24}
+                        color="#b4b4b4ff"
+                    />
+                </TouchableOpacity>
 
-            <TextInput
-                placeholder="Password"
-                style={styles.input}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-
-            <TextInput
-                placeholder="Confirm Password"
-                style={styles.input}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry
-            />
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Confirm Password"
+                    style={styles.passwwordInput}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry
+                />
+                <TouchableOpacity
+                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                    style={styles.iconButton}>
+                    <Ionicons
+                        name={showConfirmPassword ? 'eye-off' : 'eye'}
+                        size={24}
+                        color="#b4b4b4ff"
+                    />
+                </TouchableOpacity>
+            </View>
 
             <TouchableOpacity style={styles.button} onPress={handleRegister}>
                 <Text style={styles.buttonText}>Register</Text>
@@ -84,13 +108,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
     },
-    input: {
+    emailInput: {
         width: "100%",
         borderWidth: 1,
         borderColor: "#ccc",
         borderRadius: 8,
         padding: 12,
-        marginBottom: 16,
+        marginBottom: 12,
     },
     button: {
         width: "100%",
@@ -98,7 +122,7 @@ const styles = StyleSheet.create({
         padding: 14,
         borderRadius: 8,
         alignItems: "center",
-        marginBottom: 12,
+        marginBottom: 16,
     },
      buttonText: {
         color: "#fff",
@@ -109,5 +133,26 @@ const styles = StyleSheet.create({
         color: "#F88158",
         marginTop: 10,
     },
+    inputContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        marginBottom: 16,
+        backgroundColor: "#fff",
+        width: "100%",
+    },
+    passwwordInput: {
+        flex: 1,
+        paddingVertical: 12,
+        paddingRight: 8,
+    },
+    iconButton: {
+        padding: 4,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
         

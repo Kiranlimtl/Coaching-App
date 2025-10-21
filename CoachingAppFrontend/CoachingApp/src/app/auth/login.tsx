@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons } from '@expo/vector-icons';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const handleLogin = () => {
@@ -29,19 +31,30 @@ export default function LoginScreen() {
 
       <TextInput
         placeholder="Email"
-        style={styles.input}
+        style={styles.emailInput}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
       />
-
-      <TextInput
-        placeholder="Password"
-        style={styles.input}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+      
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Password"
+          style={styles.passwwordInput}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+        />
+        <TouchableOpacity 
+          onPress={() => setShowPassword(!showPassword)}
+          style={styles.iconButton}>
+            <Ionicons
+              name={showPassword ? 'eye-off' : 'eye'}
+              size={24}
+              color="#b4b4b4ff"
+            />
+        </TouchableOpacity>
+      </View>
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
     color: "#053460",
     paddingBottom: 20,
   },
-  input: {
+  emailInput: {
     width: "100%",
     borderWidth: 1,
     borderColor: "#ccc",
@@ -79,7 +92,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
-    backgroundColor: "#ffa384ff",
+    backgroundColor: "#fd9572ff",
     padding: 14,
     borderRadius: 8,
     alignItems: "center",
@@ -94,4 +107,25 @@ const styles = StyleSheet.create({
     color: "#F88158",
     marginTop: 8,
   },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    marginBottom: 16,
+    backgroundColor: "#fff",
+    width: "100%",
+  },
+  passwwordInput: {
+    flex: 1,
+    paddingVertical: 12,
+    paddingRight: 8,
+  },
+  iconButton: {
+    padding: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
