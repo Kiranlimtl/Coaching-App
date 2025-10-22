@@ -12,6 +12,11 @@ export default function LoginScreen() {
   const router = useRouter();
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Login Failed", "Email and password are required.");
+      return;
+    }
+
     try {
       setLoading(true);
       await login({ email, password });

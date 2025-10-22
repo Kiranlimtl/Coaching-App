@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 
-const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL || 'http://localhost:3001';
+const BACKEND_BASE_URL = process.env.EXPO_PUBLIC_BACKEND_BASE_URL;
+console.log("BACKEND_BASE_URL:", BACKEND_BASE_URL);
 
 type FetchOptions = Omit<RequestInit, 'body'> & {
   body?: RequestInit['body'] | Record<string, any>;
@@ -53,6 +54,8 @@ export async function fetchBase(
       ? JSON.stringify(options.body)
       : options.body;
 
+  console.log("Fetch URL:", `${BACKEND_BASE_URL}${url}`);
+  console.log("Fetch Options:", { ...options, headers, body });
   const res = await fetch(`${BACKEND_BASE_URL}${url}`, { ...options, headers, body });
 
   if (!res.ok) {
