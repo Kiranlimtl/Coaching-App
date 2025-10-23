@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } fro
 import { useRouter } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
 import { login } from "@/services/authService";
+import GoogleButton from "@/components/googleLoginButton";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <Image 
         source ={require('../../../assets/coachflowlogov1.png')} 
-        style={{ width: 300, height: 300, marginBottom: 10 }} 
+        style={{ width: 250, height: 250, marginBottom: 10 }} 
         resizeMode="contain"
       />
 
@@ -70,6 +71,14 @@ export default function LoginScreen() {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
+      <View style={styles.dividerContainer}>
+        <View style={styles.line} />
+        <Text style={styles.dividerText}>Or login with</Text>
+        <View style={styles.line} />
+      </View>
+
+      <GoogleButton onPress={() => Alert.alert("Google Login", "Google login pressed")} />
+
       <TouchableOpacity onPress={() => router.push("/auth/register")}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
@@ -80,7 +89,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#fff",
     paddingHorizontal: 24,
@@ -96,17 +105,17 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 12,
     marginBottom: 16,
   },
   button: {
     width: "100%",
-    backgroundColor: "#fd9572ff",
+    backgroundColor: "#ff774aff",
     padding: 14,
-    borderRadius: 8,
+    borderRadius: 20,
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: 16,
   },
   buttonText: {
     color: "#fff",
@@ -122,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 8,
+    borderRadius: 20,
     paddingHorizontal: 12,
     marginBottom: 16,
     backgroundColor: "#fff",
@@ -137,5 +146,22 @@ const styles = StyleSheet.create({
     padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#ccc', // light grey line
+  },
+  dividerText: {
+    marginHorizontal: 10,
+    color: '#777',
+    fontSize: 14,
+  },
 });
