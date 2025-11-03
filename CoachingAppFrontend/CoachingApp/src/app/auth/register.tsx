@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { register } from '@/services/authService';
 
 export default function RegisterScreen() {
     const [email, setEmail] = useState('');
@@ -9,21 +10,26 @@ export default function RegisterScreen() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);  
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const handleRegister = () => {
-        // Replace with your registration logic
-        if (password != confirmPassword) {
-            Alert.alert('Passwords do not match');
+    const handleRegister = async () => {
+        if (!email || !password) {
+            Alert.alert("Registration", "Email and password are required.");
             return;
+            }
+        
+        try {
+          setLoading(true);
+          await register({ email, password });
+          router.replace("/protected"); // redirect to protected area
+        } catch (err: any) {
+          console.error("Registration error:", err);
+          Alert.alert("Register failed", err.message || "An error occurred during login");
+        } finally {
+          setLoading(false);
         }
-        else if (email && password) {
-            Alert.alert('Registration successful!');
-            router.replace('/protected'); // redirect to protected area
-        } else {
-            Alert.alert('Please enter valid email and password');
-        }
-    };
+      };
 
     return (
         <View style={styles.container}>

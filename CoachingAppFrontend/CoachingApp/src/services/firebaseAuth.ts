@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 
 export async function signInWithFirebase(email: string, password: string) {
@@ -14,5 +14,18 @@ export async function signInWithFirebase(email: string, password: string) {
     } else {
       throw new Error("An unexpected error occurred");
     }
+  }
+}
+
+export async function registerWithFirebase(email: string, password: string) {
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        return await userCredential.user.getIdToken();
+    } catch (error: any) {
+        if (error.code === "auth/email-already-in-use") {
+      throw new Error("Email is already in use");
+    } else {
+      throw new Error("An unexpected error occurred");
+    } 
   }
 }

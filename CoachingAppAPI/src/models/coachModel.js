@@ -65,10 +65,10 @@ export const CoachModel = {
         return result.rows[0]
     },
 
-    async create({ name, email, phone, firebase_uid, level, is_head_coach }) {
+    async create({ email, firebase_uid }) {
         const result = await db.query(
-            'INSERT INTO coach (name, email, phone, firebase_uid, level, is_head_coach) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [name, email, phone, firebase_uid, level, is_head_coach]
+            'INSERT INTO coach (email, firebase_uid) VALUES ($1, $2) RETURNING *',
+            [email, firebase_uid]
         );
         return result.rows[0];
     },
