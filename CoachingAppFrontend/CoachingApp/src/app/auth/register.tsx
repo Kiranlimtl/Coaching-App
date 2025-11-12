@@ -34,12 +34,12 @@ export default function RegisterScreen() {
     return (
         <View style={styles.container}>
             <Image 
-                source ={require('../../../assets/coachflowlogov1.png')} 
+                source ={require('../../../assets/coachflowlogov2.png')} 
                 style={{ width: 200, height: 200, marginBottom: 10 }} 
                 resizeMode="contain"
             />
             
-            <Text style={styles.title}>New User{'\n'}Create an Account 🚀</Text>
+            <Text style={styles.title}>Create{"\n"}Account</Text>
 
             <TextInput
                 placeholder="Email"
@@ -100,60 +100,65 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#fcfaff',
         padding: 24,
     },
     title: {
-        fontSize: 24,
-        fontWeight: "600",
-        marginBottom: 24,
-        color: "#053460",
-        paddingBottom: 20,
+        fontSize: 34,
+        fontFamily: "Poppins_600SemiBold",
+        margin: 20,
+        color: "#ea5c2a",
         justifyContent: 'center',
         textAlign: 'center',
+        marginBottom: 30,
     },
     emailInput: {
         width: "100%",
-        borderWidth: 1,
-        borderColor: "#ccc",
-        borderRadius: 8,
-        padding: 12,
-        marginBottom: 12,
+        backgroundColor: "#f3f2f8ff",
+        borderRadius: 12,
+        padding: 16,
+        fontSize: 14,
+        fontFamily: "Poppins_400Regular",
+        marginBottom: 16,
+        borderWidth: 0,
+        borderColor: "#E0E0E0"
     },
     button: {
-        width: "100%",
-        backgroundColor: "#F88158",
+        width: "80%",
+        backgroundColor: "#ea5c2a",
         padding: 14,
-        borderRadius: 8,
+        borderRadius: 16,
         alignItems: "center",
         marginBottom: 16,
+        marginTop: 10,
+        elevation: 1,
     },
      buttonText: {
-        color: "#fff",
-        fontWeight: "600",
+        color: "#fcfaff",
         fontSize: 16,
+        fontFamily: "Poppins_500Medium",
+        letterSpacing: 1,
     },
     link: {
-        color: "#F88158",
-        marginTop: 10,
+        color: "#ea5c2a",
+        marginTop: 8,
+        fontFamily: "Poppins_400Regular",
     },
     inputContainer: {
         flexDirection: "row",
         alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#ccc",
-        borderRadius: 8,
-        paddingHorizontal: 12,
+        borderRadius: 16,
+        padding: 8,
         marginBottom: 16,
-        backgroundColor: "#fff",
+        backgroundColor: "#f3f2f8ff",
         width: "100%",
     },
     passwwordInput: {
         flex: 1,
-        paddingVertical: 12,
-        paddingRight: 8,
+        fontFamily: "Poppins_400Regular",
     },
     iconButton: {
         padding: 4,

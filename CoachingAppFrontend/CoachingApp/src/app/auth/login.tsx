@@ -33,12 +33,12 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <Image 
-        source ={require('../../../assets/coachflowlogov1.png')} 
-        style={{ width: 250, height: 250, marginBottom: 10 }} 
+        source ={require('../../../assets/coachflowlogov2.png')} 
+        style={{ width: 250, height: 250, marginBottom: 10,}} 
         resizeMode="contain"
       />
 
-      <Text style={styles.title}>Welcome Back 🏀</Text>
+      <Text style={styles.title}>Welcome Back</Text>
 
       <TextInput
         placeholder="Email"
@@ -51,7 +51,7 @@ export default function LoginScreen() {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
-          style={styles.passwwordInput}
+          style={styles.passwordInput}
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
@@ -77,7 +77,7 @@ export default function LoginScreen() {
         <View style={styles.line} />
       </View>
 
-      <GoogleButton onPress={() => Alert.alert("Google Login", "Google login pressed")} />
+      <GoogleButton onPress={() => Alert.alert("Google Login", "Google login pressed")}/>
 
       <TouchableOpacity onPress={() => router.push("/auth/register")}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
@@ -89,58 +89,66 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    paddingHorizontal: 24,
+    width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#fcfaff',
+    padding: 24,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "800",
-    marginBottom: 24,
-    color: "#053460",
-    paddingBottom: 20,
+    fontSize: 34,
+    fontFamily: "Poppins_600SemiBold",
+    margin: 20,
+    color: "#ea5c2a",
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginBottom: 30,
   },
   emailInput: {
     width: "100%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 20,
-    padding: 12,
+    backgroundColor: "#f3f2f8ff",
+    borderRadius: 12,
+    padding: 16,
+    fontSize: 14,
+    fontFamily: "Poppins_400Regular",
     marginBottom: 16,
+    borderWidth: 0,
+    borderColor: "#E0E0E0"
   },
   button: {
-    width: "100%",
-    backgroundColor: "#ff774aff",
+    width: "80%",
+    backgroundColor: "#ea5c2a",
     padding: 14,
-    borderRadius: 20,
+    borderRadius: 16,
     alignItems: "center",
-    marginBottom: 16,
+    marginBottom: 24,
+    marginTop: 10,
+    elevation: 1,
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "600",
+    color: "#fcfaff",
     fontSize: 16,
+    fontFamily: "Poppins_500Medium",
+    letterSpacing: 1,
   },
   link: {
-    color: "#F88158",
+    color: "#ea5c2a",
     marginTop: 8,
+    fontFamily: "Poppins_500Medium",
+
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 20,
-    paddingHorizontal: 12,
+    borderRadius: 16,
+    padding: 8,
     marginBottom: 16,
-    backgroundColor: "#fff",
+    backgroundColor: "#f3f2f8ff",
     width: "100%",
   },
-  passwwordInput: {
+  passwordInput: {
     flex: 1,
-    paddingVertical: 12,
-    paddingRight: 8,
+    fontFamily: "Poppins_400Regular",
   },
   iconButton: {
     padding: 4,
@@ -150,18 +158,20 @@ const styles = StyleSheet.create({
   dividerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
     width: '100%',
     alignSelf: 'center',
   },
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#ccc', // light grey line
+    backgroundColor: '#8d8d8dff', // light grey line
   },
   dividerText: {
     marginHorizontal: 10,
-    color: '#777',
+    color: '#8d8d8dff',
     fontSize: 14,
+    fontFamily: "Poppins_400Regular",
+
   },
 });

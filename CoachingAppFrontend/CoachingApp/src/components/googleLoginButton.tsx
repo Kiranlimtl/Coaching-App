@@ -24,15 +24,11 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "white",
     borderColor: "#cacacaff",
-    borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 16,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginBottom: 16,
-    width: "100%",
-    shadowColor: "#000",
-    shadowOpacity: 0.025,
-    shadowRadius: 3,
+    marginBottom: 24,
+    width: "80%",
     elevation: 2,
   },
   content: {
@@ -49,5 +45,7 @@ const styles = StyleSheet.create({
     color: "#333",
     fontSize: 16,
     fontWeight: "500",
+    fontFamily: "Poppins_500Medium",
+    letterSpacing: 0.5,
   },
 });
