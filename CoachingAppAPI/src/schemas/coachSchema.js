@@ -16,6 +16,7 @@ export const coachSchema = z.object({
 export const createCoachSchema = z.object({
     email: z.string().email("Invalid email"),
     firebaseUid: z.string().min(1,"Firebase UID is required"),
+    name: z.string().optional()
 });
 
 export const updateCoachSchema = z.object({

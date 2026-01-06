@@ -20,14 +20,23 @@ export default function RegisterScreen() {
             }
         
         try {
-          setLoading(true);
-          await register({ email, password });
-          router.replace("/protected"); // redirect to protected area
+            setLoading(true);
+            await register({ email, password });
+            router.replace("/auth/createProfileDetails"); // redirect to create profile details
         } catch (err: any) {
-          console.error("Registration error:", err);
-          Alert.alert("Register failed", err.message || "An error occurred during login");
+            if (err.message === "Email is already in use") {
+                Alert.alert("Registration failed", "Email is already in use. Please log in instead.",
+                    [
+                        { text: "Cancel", style: "cancel" },
+                        { text: "Sign in", onPress: () => router.push('/auth/login') }
+                    ]
+                );
+                return;
+            }
+            console.error("Registration error:", err);
+            Alert.alert("Register failed", err.message || "An error occurred during login");
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
       };
 
@@ -54,7 +63,7 @@ export default function RegisterScreen() {
                     style={styles.passwwordInput}
                     value={password}
                     onChangeText={setPassword}
-                    secureTextEntry
+                    secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity
                     onPress={() => setShowPassword(!showPassword)}
@@ -73,7 +82,7 @@ export default function RegisterScreen() {
                     style={styles.passwwordInput}
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
-                    secureTextEntry
+                    secureTextEntry={!showConfirmPassword}
                 />
                 <TouchableOpacity
                     onPress={() => setShowConfirmPassword(!showConfirmPassword)}

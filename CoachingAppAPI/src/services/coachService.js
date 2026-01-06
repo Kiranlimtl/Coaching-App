@@ -16,9 +16,14 @@ export const CoachService = {
                 firebase_uid: firebaseUid
             })
 
-        return coach;
+            return coach;
         } catch (error) {
-            console.log(error)
+            try {
+                await admin.auth().deleteUser(firebaseUid);
+                console.log("Deleted Firebase user due to registration failure");
+            } catch (firebaseError) {
+                console.error("Failed to delete Firebase user after registration failure", firebaseError);
+            }
             throw error
         }
     },

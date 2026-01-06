@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import BasketballCourtSVG from '../../../assets/basketballcourtsvg.svg';
 import { MotiView } from 'moti';
 import { Easing } from 'react-native-reanimated';
+import { createProfileDetails } from '@/services/authService';
 
 
 export default function CreateProfileDetails() {
@@ -16,7 +17,17 @@ export default function CreateProfileDetails() {
         if (!name || !phone) {
             Alert.alert("Profile Creation", "Name and phone number are required.");
             return;
-        }   
+        };
+        try {
+            setLoading(true);
+            await createProfileDetails({ name, phone });
+            router.replace('/protected'); // redirect to protected area
+        } catch (err: any) {
+            console.error("Profile creation error:", err);
+            Alert.alert("Profile creation failed", err.message || "An error occurred during profile creation");
+        } finally {
+            setLoading(false);
+        };
     }
 
     return (
