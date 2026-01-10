@@ -25,9 +25,9 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Coaching API!');
 });
 
-app.use('/coaches', coachRoutes);
-app.use('/students', studentRoutes);
-app.use('/classes', classRoutes);
+app.use('/coach', coachRoutes);
+app.use('/student', studentRoutes);
+app.use('/class', classRoutes);
 app.use('/class-students', classStudentRoutes);
 app.use('/coach-payments', coachPaymentRoutes);
 

@@ -13,19 +13,10 @@ export const coachSchema = z.object({
     updatedAt: z.string().datetime().optional()
 });
 
-export const createCoachSchema = coachSchema.omit({
-    id: true,
-    firebaseUid: true,
-    createdAt: true,
-    updatedAt: true,
-}).extend({
-    isHeadCoach: z.boolean().default(false),
-    level: z.number().int().nullable().optional().default(null),
-    password: z.string().min(),
-    confirmPassword: z.string().min()
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "Password do not match",
-    path: ["confirm_password"],
+export const createCoachSchema = z.object({
+    email: z.string().email("Invalid email"),
+    firebaseUid: z.string().min(1,"Firebase UID is required"),
+    name: z.string().optional()
 });
 
 export const updateCoachSchema = z.object({

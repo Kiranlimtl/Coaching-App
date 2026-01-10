@@ -4,29 +4,26 @@ import CustomError from '../utils/CustomError.js';
 import ERROR_MESSAGES from '../constants/errorMessages.js';
 
 export const CoachService = {
-    async register({ name, email, password, phone =  null, level = null, isHeadCoach = false }) {
-
+    async register({ email, firebaseUid }) {
         try {
-            const userRecord = await admin.auth().createUser({
-                email,
-                password,
-                displayName: name,
-            });
-
-            const firebaseUid = userRecord.uid;
-    
+            const existingCoach = await CoachModel.findByEmail(email);
+            if (existingCoach) {
+                throw new CustomError('Email already in use', 400);
+            }
+            
             const coach = await CoachModel.create({
-                name,
                 email,
-                phone,
-                firebase_uid: firebaseUid,
-                level,
-                is_head_coach: isHeadCoach
+                firebase_uid: firebaseUid
             })
 
-        return coach;
+            return coach;
         } catch (error) {
-            console.log(error)
+            try {
+                await admin.auth().deleteUser(firebaseUid);
+                console.log("Deleted Firebase user due to registration failure");
+            } catch (firebaseError) {
+                console.error("Failed to delete Firebase user after registration failure", firebaseError);
+            }
             throw error
         }
     },

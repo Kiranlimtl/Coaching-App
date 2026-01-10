@@ -1,11 +1,18 @@
+import admin from "../config/firebase.js";
 import { CoachService } from "../services/coachService.js";
 
 export const CoachController = {
     async register(req, res, next) {
         try {
             console.log('Registering user');
-            const { name, email, password, phone, level, isHeadCoach } = req.body;
-            const coach = await CoachService.register({ name, email, password, phone, level, isHeadCoach });
+            const token = req.headers.authorization?.split(' ')[1];
+            const decodedToken = await admin.auth().verifyIdToken(token);
+            
+            const firebaseUid = decodedToken.uid;
+            console.log(`Firebase UID: ${firebaseUid}`);
+
+            const { email } = req.body;
+            const coach = await CoachService.register({ email, firebaseUid });
             res.status(201).json({ message: 'Coach created successfully', coach})
         } catch (error) {
             next(error);
