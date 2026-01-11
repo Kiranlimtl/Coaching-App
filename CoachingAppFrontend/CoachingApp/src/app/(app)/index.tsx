@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, TouchableNativeFeedback, Pressable, FlatList } from 'react-native';
 import Popover from 'react-native-popover-view'
+import { useQuery } from '@tanstack/react-query';
 import { Link } from "expo-router";
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
