@@ -66,3 +66,9 @@ export const getClassQuerySchema = z.object({
 
     order: z.enum(['asc', 'desc']).optional(),
 });
+
+export const idParamSchema = z.object({
+    id: z.string().refine((val) => !isNaN(Number(val)), {
+        message: "ID must be a valid number"
+    }).transform(Number)
+});

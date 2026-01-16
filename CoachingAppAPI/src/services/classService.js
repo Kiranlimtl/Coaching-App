@@ -136,5 +136,14 @@ export const ClassService = {
         } catch (error) {
             throw new CustomError(ERROR_MESSAGES.FETCH_CLASSES_FAIL, 500);
         }
-    }
+    },
+
+    async getClassesAsListItemPerCoach(coachId) {
+        try {
+            const classesAsListItem = await ClassModel.getClassAsListItemPerCoach(coachId);
+            return classesAsListItem;
+        } catch (error) {
+            throw new CustomError(ERROR_MESSAGES.FETCH_CLASS_ITEM_AS_LIST_FAIL, 500);
+        }
+    },
 }

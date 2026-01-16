@@ -21,7 +21,7 @@ export default function LoginScreen() {
     try {
       setLoading(true);
       await login({ email, password });
-      router.replace("/protected"); // redirect to protected area
+      router.replace("/(app)/home"); // redirect to protected area
     } catch (err: any) {
       console.error("Login error:", err);
       Alert.alert("Login failed", err.message || "An error occurred during login");
@@ -79,7 +79,7 @@ export default function LoginScreen() {
 
       <GoogleButton onPress={() => Alert.alert("Google Login", "Google login pressed")}/>
 
-      <TouchableOpacity onPress={() => router.push("/auth/register")}>
+      <TouchableOpacity onPress={() => router.push("/(auth)/register")}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
     </View>

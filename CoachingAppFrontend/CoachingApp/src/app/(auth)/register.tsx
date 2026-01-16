@@ -22,7 +22,7 @@ export default function RegisterScreen() {
         try {
             setLoading(true);
             await register({ email, password });
-            router.replace("/auth/createProfileDetails"); // redirect to create profile details
+            router.replace("/(auth)/createProfileDetails"); // redirect to create profile details
         } catch (err: any) {
             if (err.message === "Email is already in use") {
                 Alert.alert("Registration failed", "Email is already in use. Please log in instead.",
@@ -99,7 +99,7 @@ export default function RegisterScreen() {
                 <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => router.push('/auth/login')}>
+            <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
                 <Text style={styles.link}>Already have an account? Log in</Text>
             </TouchableOpacity>
         </View>

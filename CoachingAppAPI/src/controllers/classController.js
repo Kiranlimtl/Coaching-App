@@ -74,5 +74,20 @@ export const ClassController = {
         } catch (error) {
             next(error);
         }
+    },
+
+    async getClassesAsListItemPerCoach(req, res, next) {
+        console.log(req.user.id)
+        try {
+            const coachId = req.user.id;
+            if (!coachId) {
+                throw new Error("Coach ID not found in request");
+            }
+            const classesAsListItem = await ClassService.getClassesAsListItemPerCoach(coachId);
+            res.status(200).json({ classesAsListItem });
+        } catch (error) {
+            next(error);
+        }
     }
+    
 }

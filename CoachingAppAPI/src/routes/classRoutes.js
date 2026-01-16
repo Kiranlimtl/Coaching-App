@@ -10,10 +10,14 @@ router.post('/', authenticateCoach, validateData(createClassSchema), ClassContro
 
 router.get('/', authenticateCoach, validateQuery(getClassQuerySchema), ClassController.listClasses);
 
+router.get('/list-item', authenticateCoach, ClassController.getClassesAsListItemPerCoach);
+
 router.get('/:id', authenticateCoach, ClassController.getClass);
 
 router.patch('/:id', authenticateCoach, validateData(updateClassSchema), ClassController.updateClass);
 
 router.delete('/:id', authenticateCoach, ClassController.deleteClass);
+
+
 
 export default router;

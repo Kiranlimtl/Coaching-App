@@ -28,6 +28,7 @@ const ERROR_MESSAGES = {
     NO_CHANGES_DETECTED: "No changes detected",
     COACH_CANNOT_MAKE_PAYMENT_THIS_CLASS: "Coach is not assigned to this class, you can only make payments for your own class",
     PAYMENT_ALREADY_EXISTS_FOR_CLASS: "A payment record already exists for this class",
+    FETCH_CLASS_ITEM_AS_LIST_FAIL: "Failed to fetch class item as list"
 
 
 }

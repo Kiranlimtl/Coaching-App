@@ -21,7 +21,7 @@ export default function CreateProfileDetails() {
         try {
             setLoading(true);
             await createProfileDetails({ name, phone });
-            router.replace('/protected'); // redirect to protected area
+            router.replace('/(app)/home'); // redirect to protected area
         } catch (err: any) {
             console.error("Profile creation error:", err);
             Alert.alert("Profile creation failed", err.message || "An error occurred during profile creation");

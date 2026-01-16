@@ -84,5 +84,41 @@ export const ClassModel = {
     async delete(id) {
         const result = await db.query(`DELETE FROM class WHERE id = $1 RETURNING *`, [id]);
         return result.rowCount > 0;
+    },
+
+    async getClassAsListItemPerCoach(coachId) {
+        const query = `
+            SELECT 
+                c.id,
+                c.name,
+                c.start_time AS "startTime",
+                c.end_time AS "endTime",
+                c.duration,
+                co.name AS "currentCoachName", 
+
+                CASE 
+                    WHEN c.end_time < NOW() THEN TRUE
+                    ELSE FALSE
+                END AS "isClassOver"
+                
+            FROM 
+                class c
+            LEFT JOIN
+                coach co ON c.current_coach_id = co.id
+                
+            -- 💡 NEW: Filtering Clause
+            WHERE 
+                c.original_coach_id = $1
+                OR c.current_coach_id = $1
+                
+            ORDER BY
+                "isClassOver" ASC, 
+                c.start_time ASC;
+            `;
+    
+        // Execute the query, passing the coachId as the parameter for $1
+        const result = await db.query(query, [coachId]); 
+        
+        return result.rows;
     }
 }

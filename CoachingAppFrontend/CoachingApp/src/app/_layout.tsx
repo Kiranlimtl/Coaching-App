@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { Inter_400Regular, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
-import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, } from "@expo-google-fonts/poppins";
+import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_800ExtraBold } from "@expo-google-fonts/poppins";
 
 
 export default function RootLayout() {
@@ -12,6 +12,7 @@ export default function RootLayout() {
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_600SemiBold,
+    Poppins_800ExtraBold
   });
 
   if (!fontsLoaded) {
@@ -19,6 +20,6 @@ export default function RootLayout() {
   }
   
   return <Stack screenOptions={{ headerShown: false }} >
-    <Stack.Screen name="(app)/index" />;
+    <Stack.Screen name="(auth)" />;
   </Stack>;
 }

@@ -11,32 +11,39 @@ type FetchOptions = Omit<RequestInit, 'body'> & {
 export async function fetchWithAuth(
     url: string,
     options: FetchOptions = {}
-): Promise<Response> {
+): Promise<any> {
     const token = await AsyncStorage.getItem('authToken');
-
+    console.log("Token: ", token);
     const headers = {
         ...options.headers,
         Authorization: token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json',
     };
+    console.log("Header: ", headers);
 
-    const body = 
+    const bodyValue =
         options.body && typeof options.body === 'object'
             ? JSON.stringify(options.body)
             : options.body;
 
-    const res = await fetch(`${BACKEND_BASE_URL}${url}`, {
-        ...options,
+    const { body: _, ...restOptions } = options;
+    const config: RequestInit = {
+        ...restOptions,
         headers,
-        body
-    });
+        body: bodyValue,
+    };
+    if (options.method && options.method !== 'GET' && bodyValue) {
+      config.body = bodyValue;
+    }
+
+    const res = await fetch(`${BACKEND_BASE_URL}${url}`, config);
 
     if (res.status === 401) {
         await AsyncStorage.removeItem('authToken');
         router.replace('/auth/login');
         throw new Error('Unauthorized');
     }
-
+    console.log(res.json)
     return res.json();
 }
 
